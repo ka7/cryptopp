@@ -1,0 +1,730 @@
+--- ../cryptopp/seal.h	2016-12-27 16:58:58.600492653 +0100
++++ ../cryptopp/seal.h.5869	2016-12-27 17:08:37.351692172 +0100
+@@ -13,7 +13,7 @@
+ 
+ //! \class SEAL_Info
+ //! \brief SEAL stream cipher information
+-//! \tparam B Endianess of the stream cipher
++//! \tparam B Endianness of the stream cipher
+ template <class B = BigEndian>
+ struct SEAL_Info : public FixedKeyLength<20, SimpleKeyingInterface::INTERNALLY_GENERATED_IV, 4>
+ {
+@@ -22,7 +22,7 @@
+ 
+ //! \class SEAL_Policy
+ //! \brief SEAL stream cipher operation
+-//! \tparam B Endianess of the stream cipher
++//! \tparam B Endianness of the stream cipher
+ template <class B = BigEndian>
+ class CRYPTOPP_NO_VTABLE SEAL_Policy : public AdditiveCipherConcretePolicy<word32, 256>, public SEAL_Info<B>
+ {
+@@ -44,7 +44,7 @@
+ 
+ //! \class SEAL
+ //! \brief SEAL stream cipher
+-//! \tparam B Endianess of the stream cipher
++//! \tparam B Endianness of the stream cipher
+ //! \sa <a href="http://www.weidai.com/scan-mirror/cs.html#SEAL-3.0-BE">SEAL</a>
+ template <class B = BigEndian>
+ struct SEAL : public SEAL_Info<B>, public SymmetricCipherDocumentation
+--- ../cryptopp/keccak.h	2016-12-27 16:58:58.584492564 +0100
++++ ../cryptopp/keccak.h.5869	2016-12-27 17:09:36.800019582 +0100
+@@ -4,7 +4,7 @@
+ //! \brief Classes for Keccak message digests
+ //! \details The Crypto++ Keccak implementation uses F1600 with XOF d=0x01.
+ //!   FIPS 202 conformance (XOF d=0x06) is available in SHA3 classes.
+-//! \details Keccak will likely change in the future to accomodate extensibility of the
++//! \details Keccak will likely change in the future to accommodate extensibility of the
+ //!   round function and the XOF functions.
+ //! \sa <a href="http://en.wikipedia.org/wiki/Keccak">Keccak</a>
+ //! \since Crypto++ 5.6.4
+@@ -24,7 +24,7 @@
+ //! \details Keccak is the base class for Keccak_224, Keccak_256, Keccak_384 and Keccak_512.
+ //!   Library users should instantiate a derived class, and only use Keccak
+ //!   as a base class reference or pointer.
+-//! \details Keccak will likely change in the future to accomodate extensibility of the
++//! \details Keccak will likely change in the future to accommodate extensibility of the
+ //!   round function and the XOF functions.
+ //! \details Perform the following to specify a different digest size. The class will use F1600,
+ //!   XOF d=0x01, and a new vaue for <tt>r()</tt> (which will be <tt>200-2*24 = 152</tt>).
+--- ../cryptopp/3way.cpp	2016-12-27 16:58:58.108489919 +0100
++++ ../cryptopp/3way.cpp.5869	2016-12-27 17:09:37.828025246 +0100
+@@ -1,4 +1,4 @@
+-// 3way.cpp - modifed by Wei Dai from Joan Daemen's 3way.c
++// 3way.cpp - modified by Wei Dai from Joan Daemen's 3way.c
+ // The original code and all modifications are in the public domain.
+ 
+ #include "pch.h"
+--- ../cryptopp/Install.txt	2016-12-27 16:58:58.112489939 +0100
++++ ../cryptopp/Install.txt.5869	2016-12-27 17:09:41.408044955 +0100
+@@ -156,7 +156,7 @@
+ 
+ Third, the code must pass cleanly though GCC and Clang's Undefined Behavior sanitizer (UBsan) and Address sanitizer (Asan) with CRYPTOPP_NO_UNALIGNED_DATA_ACCESS defined in config.h. See DYNAMIC ANALYSIS above on how to execute them.
+ 
+-Fourth, the test harness provides a "validation" option which performs basic system checks (like endianess and word sizes) and exercises algorithms (like AES and SHA). You run the validation suite as shown below. The tail of the output should indicate 0 failed tests.
++Fourth, the test harness provides a "validation" option which performs basic system checks (like endianness and word sizes) and exercises algorithms (like AES and SHA). You run the validation suite as shown below. The tail of the output should indicate 0 failed tests.
+ 
+     ./cryptest.exe v
+     ...
+--- ../cryptopp/iterhash.h	2016-12-27 16:58:58.584492564 +0100
++++ ../cryptopp/iterhash.h.5869	2016-12-27 17:09:46.684073995 +0100
+@@ -41,7 +41,7 @@
+ 
+ 	//! \brief Provides input and output data alignment for optimal performance.
+ 	//! \return the input data alignment that provides optimal performance
+-	//! \details OptimalDataAlignment returnes the natural alignment of the hash word.
++	//! \details OptimalDataAlignment returns the natural alignment of the hash word.
+ 	unsigned int OptimalDataAlignment() const {return GetAlignmentOf<T>();}
+ 
+ 	//! \brief Updates a hash with additional input
+--- ../cryptopp/config.h	2016-12-27 16:58:58.564492447 +0100
++++ ../cryptopp/config.h.5869	2016-12-27 17:09:54.032114451 +0100
+@@ -379,7 +379,7 @@
+ 	// 4512: assignment operator not generated
+ 	// 4660: explicitly instantiating a class that's already implicitly instantiated
+ 	// 4661: no suitable definition provided for explicit template instantiation request
+-	// 4786: identifer was truncated in debug information
++	// 4786: identifier was truncated in debug information
+ 	// 4355: 'this' : used in base member initializer list
+ 	// 4910: '__declspec(dllexport)' and 'extern' are incompatible on an explicit instantiation
+ #	pragma warning(disable: 4127 4231 4250 4251 4275 4505 4512 4660 4661 4786 4355 4910)
+--- ../cryptopp/asn.cpp	2016-12-27 16:58:58.556492405 +0100
++++ ../cryptopp/asn.cpp.5869	2016-12-27 17:09:57.968136121 +0100
+@@ -502,7 +502,7 @@
+ }
+ 
+ // TODO: GCC (and likely other compilers) identify this as a copy constructor; and not a constructor.
+-//   We have to wait until Crypto++ 6.0 to fix it becuase the signature change breaks versioning.
++//   We have to wait until Crypto++ 6.0 to fix it because the signature change breaks versioning.
+ DERGeneralEncoder::DERGeneralEncoder(DERGeneralEncoder &outQueue, byte asnTag)
+ 	: ByteQueue(), m_outQueue(outQueue), m_finished(false), m_asnTag(asnTag)
+ {
+--- ../cryptopp/rng.h	2016-12-27 16:58:58.600492653 +0100
++++ ../cryptopp/rng.h.5869	2016-12-27 17:10:30.420314713 +0100
+@@ -84,7 +84,7 @@
+ class MaurerRandomnessTest : public Bufferless<Sink>
+ {
+ public:
+-	//! \brief Contruct a MaurerRandomnessTest
++	//! \brief Construct a MaurerRandomnessTest
+ 	MaurerRandomnessTest();
+ 
+ 	size_t Put2(const byte *inString, size_t length, int messageEnd, bool blocking);
+--- ../cryptopp/misc.h	2016-12-27 16:58:58.588492582 +0100
++++ ../cryptopp/misc.h.5869	2016-12-27 17:10:47.952411168 +0100
+@@ -1796,7 +1796,7 @@
+ 	}
+ }
+ 
+-//! \brief Reverses bytes in a value depending upon endianess
++//! \brief Reverses bytes in a value depending upon endianness
+ //! \tparam T the class or type
+ //! \param order the ByteOrder of the data
+ //! \param value the value to conditionally reverse
+@@ -1860,7 +1860,7 @@
+ //! \param in the input array of elements
+ //! \param byteCount the byte count of the arrays
+ //! \details Internally, ByteReverse visits each element in the in array
+-//!   calls ByteReverse on it depending on the desired endianess, and writes the result to out.
++//!   calls ByteReverse on it depending on the desired endianness, and writes the result to out.
+ //! \details ByteReverse does not process tail byes, or bytes that are
+ //!   \a not part of a full element. If T is int (and int is 4 bytes), then
+ //!   <tt>byteCount = 10</tt> means only the first 2 elements or 8 bytes are
+@@ -2136,7 +2136,7 @@
+ //! \class GetBlock
+ //! \brief Access a block of memory
+ //! \tparam T class or type
+-//! \tparam B enumeration indicating endianess
++//! \tparam B enumeration indicating endianness
+ //! \tparam A flag indicating alignment
+ //! \details GetBlock() provides alternate read access to a block of memory. The enumeration B is
+ //!   BigEndian or LittleEndian. The flag A indicates if the memory block is aligned for class or type T.
+@@ -2178,7 +2178,7 @@
+ //! \class PutBlock
+ //! \brief Access a block of memory
+ //! \tparam T class or type
+-//! \tparam B enumeration indicating endianess
++//! \tparam B enumeration indicating endianness
+ //! \tparam A flag indicating alignment
+ //! \details PutBlock() provides alternate write access to a block of memory. The enumeration B is
+ //!   BigEndian or LittleEndian. The flag A indicates if the memory block is aligned for class or type T.
+@@ -2223,7 +2223,7 @@
+ //! \class BlockGetAndPut
+ //! \brief Access a block of memory
+ //! \tparam T class or type
+-//! \tparam B enumeration indicating endianess
++//! \tparam B enumeration indicating endianness
+ //! \tparam GA flag indicating alignment for the Get operation
+ //! \tparam PA flag indicating alignment for the Put operation
+ //! \details GetBlock() provides alternate write access to a block of memory. The enumeration B is
+--- ../cryptopp/pubkey.cpp	2016-12-27 16:58:58.592492602 +0100
++++ ../cryptopp/pubkey.cpp.5869	2016-12-27 17:12:19.652915389 +0100
+@@ -56,7 +56,7 @@
+ 	size_t maxRecoverableLength = encoding.MaxRecoverableLength(MessageRepresentativeBitLength(), GetHashIdentifier().second, ma.AccessHash().DigestSize());
+ 
+ 	if (maxRecoverableLength == 0)
+-		{throw NotImplemented("TF_SignerBase: this algorithm does not support messsage recovery or the key is too short");}
++		{throw NotImplemented("TF_SignerBase: this algorithm does not support message recovery or the key is too short");}
+ 	if (recoverableMessageLength > maxRecoverableLength)
+ 		throw InvalidArgument("TF_SignerBase: the recoverable message part is too long for the given key and algorithm");
+ 
+--- ../cryptopp/TestScripts/cryptest.sh	2016-12-27 16:58:58.164490225 +0100
++++ ../cryptopp/TestScripts/cryptest.sh.5869	2016-12-27 17:13:11.485200159 +0100
+@@ -26,7 +26,7 @@
+ # Using 'fast' is shorthand for HAVE_VALGRIND=0 WANT_BENCHMARKS=0:
+ #     ./cryptest.sh fast
+ 
+-# You can reduce CPU load with the folowing. It will use half the number of CPU cores
++# You can reduce CPU load with the following. It will use half the number of CPU cores
+ # rather than all of them. Its useful at places like the GCC Compile Farm, where being nice is policy.
+ #     ./cryptest.sh nice
+ 
+@@ -928,7 +928,7 @@
+ 
+ ############################################
+ 
+-# Calcualte these once. They handle Clang, GCC, ICC, etc
++# Calculate these once. They handle Clang, GCC, ICC, etc
+ DEBUG_CXXFLAGS="-DDEBUG $OPT_G3 $OPT_O0"
+ RELEASE_CXXFLAGS="-DNDEBUG $OPT_G2 $OPT_O2"
+ VALGRIND_CXXFLAGS="-DNDEBUG $OPT_G3 $OPT_O1"
+--- ../cryptopp/wake.h	2016-12-27 16:58:58.644492888 +0100
++++ ../cryptopp/wake.h.5869	2016-12-27 17:13:15.433221842 +0100
+@@ -14,7 +14,7 @@
+ 
+ //! \class WAKE_OFB_Info
+ //! \brief WAKE stream cipher information
+-//! \tparam B Endianess of the stream cipher
++//! \tparam B Endianness of the stream cipher
+ //! \since Crypto++ 1.0
+ template <class B = BigEndian>
+ struct WAKE_OFB_Info : public FixedKeyLength<32>
+@@ -34,7 +34,7 @@
+ 
+ //! \class WAKE_Policy
+ //! \brief WAKE stream cipher operation
+-//! \tparam B Endianess of the stream cipher
++//! \tparam B Endianness of the stream cipher
+ //! \since Crypto++ 1.0
+ template <class B = BigEndian>
+ class CRYPTOPP_NO_VTABLE WAKE_Policy : public AdditiveCipherConcretePolicy<word32, 1, 64>, protected WAKE_Base
+@@ -48,7 +48,7 @@
+ 
+ //! \class WAKE_OFB
+ //! \brief WAKE stream cipher
+-//! \tparam B Endianess of the stream cipher
++//! \tparam B Endianness of the stream cipher
+ //! \since Crypto++ 1.0
+ template <class B = BigEndian>
+ struct WAKE_OFB : public WAKE_OFB_Info<B>, public SymmetricCipherDocumentation
+--- ../cryptopp/cryptest.nmake	2016-12-27 16:58:58.568492475 +0100
++++ ../cryptopp/cryptest.nmake.5869	2016-12-27 17:13:16.709228858 +0100
+@@ -71,7 +71,7 @@
+ # Release build
+ CXXFLAGS = $(CXXFLAGS) /DNDEBUG /D_NDEBUG /Oi /Oy /O2 /MT
+ 
+-# Attempt to detect when <sdkddkver.h> and <winapifamily.h> are avilable
++# Attempt to detect when <sdkddkver.h> and <winapifamily.h> are available
+ #   http://stackoverflow.com/q/40577415 ?
+ !IF "$(WINDOWSSDKDIR)" != "" || "$(WINDOWSSDKLIBVERSION)" != ""
+ CXXFLAGS = $(CXXFLAGS) /FI sdkddkver.h
+--- ../cryptopp/cryptlib.h	2016-12-27 16:58:58.572492491 +0100
++++ ../cryptopp/cryptlib.h.5869	2016-12-27 17:13:45.657387829 +0100
+@@ -431,7 +431,7 @@
+ 	//! \param valueType reference to a variable that receives the value
+ 	//! \param pValue void pointer to a variable that receives the value
+ 	//! \returns true if the value was retrieved, false otherwise
+-	//! \details GetVoidValue() retrives the value of  name if it exists.
++	//! \details GetVoidValue() retrieves the value of  name if it exists.
+ 	//! \note  GetVoidValue() is an internal function and should be implemented
+ 	//!   by derived classes. Users should use one of the other functions instead.
+ 	//! \sa GetValue(), GetValueWithDefault(), GetIntValue(), GetIntValueWithDefault(),
+@@ -1212,14 +1212,14 @@
+ 	//! \return a random 8-bit byte
+ 	//! \details Default implementation calls GenerateBlock() with one byte.
+ 	//! \details All generated values are uniformly distributed over the range specified within the
+-	//!   the contraints of a particular generator.
++	//!   the constraints of a particular generator.
+ 	virtual byte GenerateByte();
+ 
+ 	//! \brief Generate new random bit and return it
+ 	//! \return a random bit
+ 	//! \details The default implementation calls GenerateByte() and return its lowest bit.
+ 	//! \details All generated values are uniformly distributed over the range specified within the
+-	//!   the contraints of a particular generator.
++	//!   the constraints of a particular generator.
+ 	virtual unsigned int GenerateBit();
+ 
+ 	//! \brief Generate a random 32 bit word in the range min to max, inclusive
+@@ -1229,14 +1229,14 @@
+ 	//! \details The default implementation calls Crop() on the difference between max and
+ 	//!    min, and then returns the result added to min.
+ 	//! \details All generated values are uniformly distributed over the range specified within the
+-	//!   the contraints of a particular generator.
++	//!   the constraints of a particular generator.
+ 	virtual word32 GenerateWord32(word32 min=0, word32 max=0xffffffffUL);
+ 
+ 	//! \brief Generate random array of bytes
+ 	//! \param output the byte buffer
+ 	//! \param size the length of the buffer, in bytes
+ 	//! \details All generated values are uniformly distributed over the range specified within the
+-	//!   the contraints of a particular generator.
++	//!   the constraints of a particular generator.
+ 	//! \note A derived generator \a must override either GenerateBlock() or
+ 	//!    GenerateIntoBufferedTransformation(). They can override both, or have one call the other.
+ 	virtual void GenerateBlock(byte *output, size_t size);
+@@ -1248,7 +1248,7 @@
+ 	//! \details The default implementation calls GenerateBlock() and pumps the result into
+ 	//!   the  DEFAULT_CHANNEL of the target.
+ 	//! \details All generated values are uniformly distributed over the range specified within the
+-	//!   the contraints of a particular generator.
++	//!   the constraints of a particular generator.
+ 	//! \note A derived generator \a must override either GenerateBlock() or
+ 	//!    GenerateIntoBufferedTransformation(). They can override both, or have one call the other.
+ 	virtual void GenerateIntoBufferedTransformation(BufferedTransformation &target, const std::string &channel, lword length);
+@@ -1411,7 +1411,7 @@
+ 		virtual byte * CreatePutSpace(size_t &size)
+ 			{size=0; return NULL;}
+ 
+-		//! \brief Determines whether input can be modifed by the callee
++		//! \brief Determines whether input can be modified by the callee
+ 		//! \return true if input can be modified, false otherwise
+ 		//! \details The base class implementation returns  false.
+ 		virtual bool CanModifyInput() const
+@@ -1494,7 +1494,7 @@
+ 		//! \param parameters a set of NameValuePairs to initialize this object
+ 		//! \throws NotImplemented
+ 		//! \details IsolatedInitialize() is used to initialize or reinitialize an object using a variable
+-		//!   number of  arbitrarily typed arguments. The function avoids the need for multiple constuctors providing
++		//!   number of  arbitrarily typed arguments. The function avoids the need for multiple constructors providing
+ 		//!   all possible combintations of configurable parameters.
+ 		//! \details IsolatedInitialize() does not call Initialize() on attached transformations. If initialization
+ 		//!   should be propagated, then use the Initialize() function.
+@@ -1521,7 +1521,7 @@
+ 		//! \param parameters a set of NameValuePairs to initialize or reinitialize this object
+ 		//! \param propagation the number of attached transformations the Initialize() signal should be passed
+ 		//! \details Initialize() is used to initialize or reinitialize an object using a variable number of
+-		//!   arbitrarily typed arguments. The function avoids the need for multiple constuctors providing
++		//!   arbitrarily typed arguments. The function avoids the need for multiple constructors providing
+ 		//!   all possible combintations of configurable parameters.
+ 		//! \details propagation count includes this object. Setting propagation to <tt>1</tt> means this
+ 		//!   object only. Setting propagation to <tt>-1</tt> means unlimited propagation.
+@@ -1555,13 +1555,13 @@
+ 
+ 		//! \brief Set propagation of automatically generated and transferred signals
+ 		//! \param propagation then new value
+-		//! \details Setting propagation to <tt>0</tt> means do not automaticly generate signals. Setting
++		//! \details Setting propagation to <tt>0</tt> means do not automatically generate signals. Setting
+ 		//!    propagation to <tt>-1</tt> means unlimited propagation.
+ 		virtual void SetAutoSignalPropagation(int propagation)
+ 			{CRYPTOPP_UNUSED(propagation);}
+ 
+ 		//! \brief Retrieve automatic signal propagation value
+-		//! \return the number of attached transformations the signal is propogated to. 0 indicates
++		//! \return the number of attached transformations the signal is propagated to. 0 indicates
+ 		//!   the signal is only witnessed by this object
+ 		virtual int GetAutoSignalPropagation() const {return 0;}
+ public:
+@@ -1784,7 +1784,7 @@
+ 	//!	\name NON-BLOCKING TRANSFER OF OUTPUT
+ 	//@{
+ 
+-		// upon return, byteCount contains number of bytes that have finished being transfered,
++		// upon return, byteCount contains number of bytes that have finished being transferred,
+ 		// and returns the number of bytes left in the current transfer block
+ 
+ 		//! \brief Transfer bytes from this object to another BufferedTransformation
+@@ -1820,7 +1820,7 @@
+ 		//!   subsequent calls to  CopyRangeTo2.
+ 		virtual size_t CopyRangeTo2(BufferedTransformation &target, lword &begin, lword end=LWORD_MAX, const std::string &channel=DEFAULT_CHANNEL, bool blocking=true) const =0;
+ 
+-		// upon return, messageCount contains number of messages that have finished being transfered,
++		// upon return, messageCount contains number of messages that have finished being transferred,
+ 		// and returns the number of bytes left in the current transfer block
+ 
+ 		//! \brief Transfer messages from this object to another BufferedTransformation
+--- ../cryptopp/base64.h	2016-12-27 16:58:58.560492425 +0100
++++ ../cryptopp/base64.h.5869	2016-12-27 17:13:56.725448591 +0100
+@@ -20,7 +20,7 @@
+ 	//! \brief Construct a Base64Encoder
+ 	//! \param attachment a BufferedTrasformation to attach to this object
+ 	//! \param insertLineBreaks a BufferedTrasformation to attach to this object
+-	//! \param maxLineLength the lenght of a line if line breaks are used
++	//! \param maxLineLength the length of a line if line breaks are used
+ 	//! \details Base64Encoder constructs a default encoder. The constructor lacks a parameter for padding, and you must
+ 	//!   use IsolatedInitialize() to modify the Base64Encoder after construction.
+ 	//! \sa IsolatedInitialize() for an example of modifying an encoder after construction.
+@@ -100,7 +100,7 @@
+ 	//! \brief Construct a Base64URLEncoder
+ 	//! \param attachment a BufferedTrasformation to attach to this object
+ 	//! \param insertLineBreaks a BufferedTrasformation to attach to this object
+-	//! \param maxLineLength the lenght of a line if line breaks are used
++	//! \param maxLineLength the length of a line if line breaks are used
+ 	//! \details Base64URLEncoder() constructs a default encoder using a web safe alphabet. The constructor ignores
+ 	//!   insertLineBreaks and maxLineLength because the web and URL safe specifications don't use them. They are
+ 	//!   present in the constructor for API compatibility with Base64Encoder so it is a drop-in replacement. The
+--- ../cryptopp/cpu.h	2016-12-27 16:58:58.564492447 +0100
++++ ../cryptopp/cpu.h.5869	2016-12-27 17:14:16.645557942 +0100
+@@ -352,7 +352,7 @@
+ 
+ //! \brief Determine if an ARM processor has CRC32 available
+ //! \returns true if the hardware is capable of CRC32 at runtime, false otherwise.
+-//! \details CRC32 instructions provide access to the processor's CRC32 and CRC32-C intructions.
++//! \details CRC32 instructions provide access to the processor's CRC32 and CRC32-C instructions.
+ //!   They are provided by ARM C Language Extensions 2.0 (ACLE 2.0) and available under Aarch64
+ //!   (ARM-64) and Aarch32 (ARM-32) running on Aarch64 (i.e., an AArch32 execution environment).
+ //! \details Runtime support requires compile time support. When compiling with GCC, you may
+--- ../cryptopp/simple.h	2016-12-27 16:58:58.612492711 +0100
++++ ../cryptopp/simple.h.5869	2016-12-27 17:15:15.597881428 +0100
+@@ -134,7 +134,7 @@
+ 	//! \param blocking specifies whether the object should block when processing input
+ 	//! \throws InputRejected
+ 	//! \returns the number of bytes that remain in the block (i.e., bytes not processed)
+-	//! \details Internally, the default implmentation throws InputRejected.
++	//! \details Internally, the default implementation throws InputRejected.
+ 	size_t Put2(const byte *inString, size_t length, int messageEnd, bool blocking)
+ 		{CRYPTOPP_UNUSED(inString); CRYPTOPP_UNUSED(length); CRYPTOPP_UNUSED(messageEnd); CRYPTOPP_UNUSED(blocking); throw InputRejected();}
+ 	//@}
+@@ -196,7 +196,7 @@
+ 	//! \param parameters a set of NameValuePairs to initialize or reinitialize this object
+ 	//! \param propagation the number of attached transformations the Initialize() signal should be passed
+ 	//! \details Initialize() is used to initialize or reinitialize an object using a variable number of
+-	//!   arbitrarily typed arguments. The function avoids the need for multiple constuctors providing
++	//!   arbitrarily typed arguments. The function avoids the need for multiple constructors providing
+ 	//!   all possible combintations of configurable parameters.
+ 	//! \details propagation count includes this object. Setting propagation to <tt>1</tt> means this
+ 	//!   object only. Setting propagation to <tt>-1</tt> means unlimited propagation.
+--- ../cryptopp/integer.h	2016-12-27 16:58:58.584492564 +0100
++++ ../cryptopp/integer.h.5869	2016-12-27 17:15:40.798019649 +0100
+@@ -22,7 +22,7 @@
+ NAMESPACE_BEGIN(CryptoPP)
+ 
+ //! \struct InitializeInteger
+-//! \brief Performs static intialization of the Integer class
++//! \brief Performs static initialization of the Integer class
+ struct InitializeInteger
+ {
+ 	InitializeInteger();
+@@ -610,7 +610,7 @@
+ 		//! \returns a reference to a std::ostream reference
+ 		//! \details The output integer responds to std::hex, std::oct, std::hex, std::upper and
+ 		//!   std::lower. The output includes the suffix \a \b h (for hex), \a \b . (\a \b dot, for dec)
+-		//!   and \a \b o (for octal). There is currently no way to supress the suffix.
++		//!   and \a \b o (for octal). There is currently no way to suppress the suffix.
+ 		//! \details If you want to print an Integer without the suffix or using an arbitrary base, then
+ 		//!   use IntToString<Integer>().
+ 		//! \sa IntToString<Integer>
+--- ../cryptopp/zdeflate.cpp	2016-12-27 16:58:58.660492979 +0100
++++ ../cryptopp/zdeflate.cpp.5869	2016-12-27 17:15:48.950064355 +0100
+@@ -98,7 +98,7 @@
+ 
+ struct HuffmanNode
+ {
+-	// Coverity finding on uninitalized 'symbol' member
++	// Coverity finding on uninitialized 'symbol' member
+ 	HuffmanNode()
+ 		: symbol(0), parent(0) {}
+ 	HuffmanNode(const HuffmanNode& rhs)
+@@ -300,7 +300,7 @@
+ 	m_detectCount = 1;
+ 	m_detectSkip = 0;
+ 
+-	// m_prev will be initialized automaticly in InsertString
++	// m_prev will be initialized automatically in InsertString
+ 	std::fill(m_head.begin(), m_head.end(), byte(0));
+ 
+ 	std::fill(m_literalCounts.begin(), m_literalCounts.end(), byte(0));
+--- ../cryptopp/filters.cpp	2016-12-27 16:58:58.576492510 +0100
++++ ../cryptopp/filters.cpp.5869	2016-12-27 17:15:59.958124710 +0100
+@@ -432,7 +432,7 @@
+ 		m_firstInputDone = false;
+ 		m_queue.ResetQueue(1, m_firstSize);
+ 
+-		// Cast to void to supress Coverity finding
++		// Cast to void to suppress Coverity finding
+ 		(void)Output(1, NULL, 0, messageEnd, blocking);
+ 	}
+ 	return 0;
+--- ../cryptopp/strciphr.h	2016-12-27 16:58:58.612492711 +0100
++++ ../cryptopp/strciphr.h.5869	2016-12-27 17:16:11.510188051 +0100
+@@ -21,7 +21,7 @@
+ //!   to take a policy class as a template parameter (although this is allowed), so that
+ //!   their code is not duplicated for each new cipher. Instead they each
+ //!   get a reference to an abstract policy interface by calling AccessPolicy() on itself, so
+-//!   AccessPolicy() must be overriden to return the actual policy reference. This is done
++//!   AccessPolicy() must be overridden to return the actual policy reference. This is done
+ //!   by the ConceretePolicyHolder class. Finally, SymmetricCipherFinal implements the constructors and
+ //!   other functions that must be implemented by the most derived class.
+ 
+@@ -273,7 +273,7 @@
+ 	//! \param output the byte buffer
+ 	//! \param size the length of the buffer, in bytes
+ 	//! \details All generated values are uniformly distributed over the range specified within the
+-	//!   the contraints of a particular generator.
++	//!   the constraints of a particular generator.
+ 	void GenerateBlock(byte *output, size_t size);
+ 
+ 	//! \brief Apply keystream to data
+@@ -426,7 +426,7 @@
+ 	void TransformRegister() {this->Iterate(NULL, NULL, ENCRYPTION, 1);}
+ 
+ 	//! \brief
+-	//! \tparam B enumeration indicating endianess
++	//! \tparam B enumeration indicating endianness
+ 	//! \details RegisterOutput() provides alternate access to the feedback register. The
+ 	//!   enumeration B is BigEndian or LittleEndian. Repeatedly applying operator()
+ 	//!   results in advancing in the register.
+--- ../cryptopp/CMakeLists.txt	2016-12-27 16:58:58.112489939 +0100
++++ ../cryptopp/CMakeLists.txt.5869	2016-12-27 17:16:14.482204340 +0100
+@@ -68,7 +68,7 @@
+ 	add_definitions(-wd68 -wd186 -wd279 -wd327 -wd161 -wd3180)
+ endif()
+ 
+-# Endianess
++# Endianness
+ TEST_BIG_ENDIAN(IS_BIG_ENDIAN)
+ if(IS_BIG_ENDIAN)
+ 	add_definitions(-DIS_BIG_ENDIAN)
+--- ../cryptopp/cryptest.sh	2016-12-27 16:58:58.568492475 +0100
++++ ../cryptopp/cryptest.sh.5869	2016-12-27 17:16:52.022410109 +0100
+@@ -26,7 +26,7 @@
+ # Using 'fast' is shorthand for HAVE_VALGRIND=0 WANT_BENCHMARKS=0:
+ #     ./cryptest.sh fast
+ 
+-# You can reduce CPU load with the folowing. It will use half the number of CPU cores
++# You can reduce CPU load with the following. It will use half the number of CPU cores
+ # rather than all of them. Its useful at places like the GCC Compile Farm, where being nice is policy.
+ #     ./cryptest.sh nice
+ 
+@@ -928,7 +928,7 @@
+ 
+ ############################################
+ 
+-# Calcualte these once. They handle Clang, GCC, ICC, etc
++# Calculate these once. They handle Clang, GCC, ICC, etc
+ DEBUG_CXXFLAGS="-DDEBUG $OPT_G3 $OPT_O0"
+ RELEASE_CXXFLAGS="-DNDEBUG $OPT_G2 $OPT_O2"
+ VALGRIND_CXXFLAGS="-DNDEBUG $OPT_G3 $OPT_O1"
+--- ../cryptopp/blake2.cpp	2016-12-27 16:58:58.560492425 +0100
++++ ../cryptopp/blake2.cpp.5869	2016-12-27 17:17:23.742583913 +0100
+@@ -476,7 +476,7 @@
+ template <>
+ void BLAKE2_Base<word64, true>::Compress(const byte *input)
+ {
+-	// Selects the most advanced implmentation at runtime
++	// Selects the most advanced implementation at runtime
+ 	static const pfnCompress64 s_pfn = InitializeCompress64Fn();
+ 	s_pfn(input, *m_state.data());
+ }
+@@ -484,7 +484,7 @@
+ template <>
+ void BLAKE2_Base<word32, false>::Compress(const byte *input)
+ {
+-	// Selects the most advanced implmentation at runtime
++	// Selects the most advanced implementation at runtime
+ 	static const pfnCompress32 s_pfn = InitializeCompress32Fn();
+ 	s_pfn(input, *m_state.data());
+ }
+--- ../cryptopp/basecode.h	2016-12-27 16:58:58.560492425 +0100
++++ ../cryptopp/basecode.h.5869	2016-12-27 17:17:24.778589584 +0100
+@@ -86,11 +86,11 @@
+ 	void IsolatedInitialize(const NameValuePairs &parameters);
+ 	size_t Put2(const byte *begin, size_t length, int messageEnd, bool blocking);
+ 
+-	//! \brief Intializes BaseN lookup array
++	//! \brief Initializes BaseN lookup array
+ 	//! \param lookup table of values
+ 	//! \param alphabet table of ASCII characters
+ 	//! \param base the base for the encoder
+-	//! \param caseInsensitive flag indicating whether the alpabet is case sensitivie
++	//! \param caseInsensitive flag indicating whether the alphabet is case sensitivie
+ 	//! \pre COUNTOF(lookup) == 256
+ 	//! \pre COUNTOF(alphabet) == base
+ 	//! \details Internally, the function sets the first 256 elements in the lookup table to
+--- ../cryptopp/filters.h	2016-12-27 16:58:58.580492533 +0100
++++ ../cryptopp/filters.h.5869	2016-12-27 17:17:36.558654119 +0100
+@@ -371,7 +371,7 @@
+ 	virtual void NextPutSingle(const byte *inString)
+ 		{CRYPTOPP_UNUSED(inString); CRYPTOPP_ASSERT(false);}
+ 	// Same as NextPut() except length can be a multiple of blockSize
+-	// Either NextPut() or NextPutMultiple() must be overriden
++	// Either NextPut() or NextPutMultiple() must be overridden
+ 	virtual void NextPutMultiple(const byte *inString, size_t length);
+ 	// Same as NextPutMultiple(), but inString can be modified
+ 	virtual void NextPutModifiable(byte *inString, size_t length)
+--- ../cryptopp/mqv.h	2016-12-27 16:58:58.592492602 +0100
++++ ../cryptopp/mqv.h.5869	2016-12-27 17:17:39.270668976 +0100
+@@ -19,7 +19,7 @@
+ //! \brief MQV domain for performing authenticated key agreement
+ //! \tparam GROUP_PARAMETERS doamin parameters
+ //! \tparam COFACTOR_OPTION cofactor option
+-//! \details GROUP_PARAMETERS paramters include the curve coefcients and the base point.
++//! \details GROUP_PARAMETERS parameters include the curve coefcients and the base point.
+ //!   Binary curves use a polynomial to represent its characteristic, while prime curves
+ //!   use a prime number.
+ //! \sa MQV, HMQV, FHMQV, and AuthenticatedKeyAgreementDomain
+--- ../cryptopp/cryptlib.cpp	2016-12-27 16:58:58.568492475 +0100
++++ ../cryptopp/cryptlib.cpp.5869	2016-12-27 17:18:40.743005583 +0100
+@@ -243,12 +243,12 @@
+ 
+ void StreamTransformation::ProcessLastBlock(byte *outString, const byte *inString, size_t length)
+ {
+-	CRYPTOPP_ASSERT(MinLastBlockSize() == 0);	// this function should be overriden otherwise
++	CRYPTOPP_ASSERT(MinLastBlockSize() == 0);	// this function should be overridden otherwise
+ 
+ 	if (length == MandatoryBlockSize())
+ 		ProcessData(outString, inString, length);
+ 	else if (length != 0)
+-		throw NotImplemented(AlgorithmName() + ": this object does't support a special last block");
++		throw NotImplemented(AlgorithmName() + ": this object doesn't support a special last block");
+ }
+ 
+ void AuthenticatedSymmetricCipher::SpecifyDataLengths(lword headerLength, lword messageLength, lword footerLength)
+--- ../cryptopp/rijndael.h	2016-12-27 16:58:58.600492653 +0100
++++ ../cryptopp/rijndael.h.5869	2016-12-27 17:19:26.323255045 +0100
+@@ -39,7 +39,7 @@
+ 		static void FillEncTable();
+ 		static void FillDecTable();
+ 
+-		// VS2005 workaround: have to put these on seperate lines, or error C2487 is triggered in DLL build
++		// VS2005 workaround: have to put these on separate lines, or error C2487 is triggered in DLL build
+ 		static const byte Se[256];
+ 		static const byte Sd[256];
+ 
+--- ../cryptopp/luc.h	2016-12-27 16:58:58.588492582 +0100
++++ ../cryptopp/luc.h.5869	2016-12-27 17:19:29.851274346 +0100
+@@ -151,7 +151,7 @@
+ {
+ };
+ 
+-// analagous to the RSA schemes defined in PKCS #1 v2.0
++// analogous to the RSA schemes defined in PKCS #1 v2.0
+ typedef LUCES<OAEP<SHA> >::Decryptor LUCES_OAEP_SHA_Decryptor;
+ typedef LUCES<OAEP<SHA> >::Encryptor LUCES_OAEP_SHA_Encryptor;
+ 
+--- ../cryptopp/pubkey.h	2016-12-27 16:58:58.596492624 +0100
++++ ../cryptopp/pubkey.h.5869	2016-12-27 17:19:47.123368847 +0100
+@@ -839,12 +839,12 @@
+ 
+ 	//! \brief Retrieves the order of the group
+ 	//! \return the order of the group
+-	//! \details Either GetGroupOrder() or GetCofactor() must be overriden in a derived class.
++	//! \details Either GetGroupOrder() or GetCofactor() must be overridden in a derived class.
+ 	virtual Integer GetGroupOrder() const {return GetSubgroupOrder()*GetCofactor();}
+ 
+ 	//! \brief Retrieves the cofactor
+ 	//! \return the cofactor
+-	//! \details Either GetGroupOrder() or GetCofactor() must be overriden in a derived class.
++	//! \details Either GetGroupOrder() or GetCofactor() must be overridden in a derived class.
+ 	virtual Integer GetCofactor() const {return GetGroupOrder()/GetSubgroupOrder();}
+ 
+ 	//! \brief Retrieves the encoded element's size
+@@ -939,7 +939,7 @@
+ 	mutable unsigned int m_validationLevel;
+ };
+ 
+-//! \brief Base implmentation of Discrete Log (DL) group parameters
++//! \brief Base implementation of Discrete Log (DL) group parameters
+ //! \tparam GROUP_PRECOMP group precomputation class
+ //! \tparam BASE_PRECOMP fixed base precomputation class
+ //! \tparam BASE class or type of an element
+@@ -1692,7 +1692,7 @@
+ 
+ //! \brief Discrete Log (DL) scheme options
+ //! \tparam T1 algorithm information
+-//! \tparam T2 group paramters for the scheme
++//! \tparam T2 group parameters for the scheme
+ template <class T1, class T2>
+ struct DL_SchemeOptionsBase
+ {
+--- ../cryptopp/blake2.h	2016-12-27 16:58:58.564492447 +0100
++++ ../cryptopp/blake2.h.5869	2016-12-27 17:20:45.119686038 +0100
+@@ -5,7 +5,7 @@
+ 
+ //! \file blake2.h
+ //! \brief Classes for BLAKE2b and BLAKE2s message digests and keyed message digests
+-//! \details This implmentation follows Aumasson, Neves, Wilcox-O'Hearn and Winnerlein's
++//! \details This implementation follows Aumasson, Neves, Wilcox-O'Hearn and Winnerlein's
+ //!   <A HREF="http://blake2.net/blake2.pdf">BLAKE2: simpler, smaller, fast as MD5</A> (2013.01.29).
+ //!   Static algorithm name return either "BLAKE2b" or "BLAKE2s". An object algorithm name follows
+ //!   the naming described in <A HREF="http://tools.ietf.org/html/rfc7693#section-4">RFC 7693, The
+@@ -196,7 +196,7 @@
+ 	void Restart();
+ 
+ 	//! \brief Restart a hash with parameter block and counter
+-	//! \param block paramter block
++	//! \param block parameter block
+ 	//! \param counter counter array
+ 	//! \details Parameter block is persisted across calls to Restart().
+ 	void Restart(const BLAKE2_ParameterBlock<T_64bit>& block, const W counter[2]);
+@@ -240,7 +240,7 @@
+ //! \brief The BLAKE2b cryptographic hash function
+ //! \details BLAKE2b can function as both a hash and keyed hash. If you want only the hash,
+ //!   then use the BLAKE2b constructor that accepts no parameters or digest size. If you
+-//!   want a keyed hash, then use the constuctor that accpts the key as a parameter.
++//!   want a keyed hash, then use the constructor that accpts the key as a parameter.
+ //!   Once a key and digest size are selected, its effectively immutable. The Restart()
+ //!   method that accepts a ParameterBlock does not allow you to change it.
+ //! \sa Aumasson, Neves, Wilcox-O'Hearn and Winnerlein's
+@@ -276,7 +276,7 @@
+ //! \brief The BLAKE2s cryptographic hash function
+ //! \details BLAKE2s can function as both a hash and keyed hash. If you want only the hash,
+ //!   then use the BLAKE2s constructor that accepts no parameters or digest size. If you
+-//!   want a keyed hash, then use the constuctor that accpts the key as a parameter.
++//!   want a keyed hash, then use the constructor that accpts the key as a parameter.
+ //!   Once a key and digest size are selected, its effectively immutable. The Restart()
+ //!   method that accepts a ParameterBlock does not allow you to change it.
+ //! \sa Aumasson, Neves, Wilcox-O'Hearn and Winnerlein's
+--- ../cryptopp/wait.h	2016-12-27 16:58:58.644492888 +0100
++++ ../cryptopp/wait.h.5869	2016-12-27 17:21:29.207926400 +0100
+@@ -18,7 +18,7 @@
+ #include <sys/select.h>
+ #endif
+ 
+-// For defintions of VOID, PVOID, HANDLE, PHANDLE, etc.
++// For definitions of VOID, PVOID, HANDLE, PHANDLE, etc.
+ #if defined(CRYPTOPP_WIN32_AVAILABLE)
+ #define WIN32_LEAN_AND_MEAN
+ #include <windows.h>
+--- ../cryptopp/trap.h	2016-12-27 16:58:58.620492760 +0100
++++ ../cryptopp/trap.h.5869	2016-12-27 17:22:06.888126557 +0100
+@@ -37,7 +37,7 @@
+ //! \details <tt>CRYPTOPP_ASSERT</tt> is the library's debugging and diagnostic assertion. <tt>CRYPTOPP_ASSERT</tt>
+ //!   is enabled by the preprocessor macros <tt>CRYPTOPP_DEBUG</tt>, <tt>DEBUG</tt> or <tt>_DEBUG</tt>.
+ //! \details <tt>CRYPTOPP_ASSERT</tt> raises a <tt>SIGTRAP</tt> (Unix) or calls <tt>DebugBreak()</tt> (Windows).
+-//!   <tt>CRYPTOPP_ASSERT</tt> is only in effect when the user explictly requests a debug configuration.
++//!   <tt>CRYPTOPP_ASSERT</tt> is only in effect when the user explicitly requests a debug configuration.
+ //! \details If you want to ensure <tt>CRYPTOPP_ASSERT</tt> is inert, then <em>do not</em> define
+ //!   <tt>CRYPTOPP_DEBUG</tt>, <tt>DEBUG</tt> or <tt>_DEBUG</tt>. Avoiding the defines means <tt>CRYPTOPP_ASSERT</tt>
+ //!   is processed into <tt>((void)(exp))</tt>.
+@@ -106,7 +106,7 @@
+ //!   some Linuxes terminate the program.
+ //! \details If DebugTrapHandler detects another handler in place, then it will not install a handler. This
+ //!   ensures a debugger can gain control of the <tt>SIGTRAP</tt> signal without contention. It also allows multiple
+-//!   DebugTrapHandler to be created without contentious or unusual behavior. Though muliple DebugTrapHandler can be
++//!   DebugTrapHandler to be created without contentious or unusual behavior. Though multiple DebugTrapHandler can be
+ //!   created, a program should only create one, if needed.
+ //! \details A DebugTrapHandler is subject to C++ static initialization [dis]order. If you need to install a handler
+ //!   and it must be installed early, then reference the code associated with <tt>CRYPTOPP_INIT_PRIORITY</tt> in
+--- ../cryptopp/nbtheory.cpp	2016-12-27 16:58:58.592492602 +0100
++++ ../cryptopp/nbtheory.cpp.5869	2016-12-27 17:22:25.184223729 +0100
+@@ -450,7 +450,7 @@
+ // this is the Quisquater test. Numbers p having passed the Lucas - Lehmer test
+ // for q and verifying p < q^3 can only be built up of two factors, both = 1 mod q,
+ // or be prime. The next two lines build the discriminant of a quadratic equation
+-// which holds iff p is built up of two factors (excercise ... )
++// which holds iff p is built up of two factors (exercise ... )
+ 
+ 	Integer r = (p-1)/q;
+ 	if (((r%q).Squared()-4*(r/q)).IsSquare())
+--- ../cryptopp/rdrand-masm.cmd	2016-12-27 16:58:58.596492624 +0100
++++ ../cryptopp/rdrand-masm.cmd.5869	2016-12-27 17:22:40.548305338 +0100
+@@ -33,7 +33,7 @@
+ @set ASFLAGS64=/nologo /D_M_X64 /W3 /Cx /Zi
+ @set LIBFLAGS=/nologo /SUBSYSTEM:CONSOLE
+ 
+-REM Use _M_X86 and _M_X64 becuase cl.exe uses them. It keeps preprocessor defines consistent.
++REM Use _M_X86 and _M_X64 because cl.exe uses them. It keeps preprocessor defines consistent.
+ echo ****************************************
+ echo Assembling rdrand.asm into rdrand-x86.obj
+ call %MASM% %ASFLAGS% /Fo rdrand-x86.obj /c rdrand.asm > nul
